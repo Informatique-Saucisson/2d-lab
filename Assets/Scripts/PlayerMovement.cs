@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
 	public Rigidbody2D rb;
     public Animator animator;
+    public SpriteRenderer spriteRenderer;
 
     public Transform groundCheckLeft;
     public Transform groundCheckRight;
@@ -28,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
 
         MovePlayer(horizontalMovement);
 
+        Flip(rb.velocity.x);
+
         float characterVelocity = Mathf.Abs(rb.velocity.x);
 
         animator.SetFloat("Speed", characterVelocity);
@@ -42,6 +45,15 @@ public class PlayerMovement : MonoBehaviour
         if (isJumping) {
             rb.AddForce(new Vector2(0f, jumpForce));
             isJumping = false;
+        }
+    }
+
+    void Flip(float _velocity)
+    {
+        if (_velocity > 0.1f) {
+            spriteRenderer.flipX = false;
+        } else if (_velocity < -0.1f) {
+            spriteRenderer.flipX = true;
         }
     }
 }
