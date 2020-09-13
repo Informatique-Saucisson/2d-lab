@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isGrounded;
 
 	public Rigidbody2D rb;
+    public Animator animator;
 
     public Transform groundCheckLeft;
     public Transform groundCheckRight;
@@ -26,6 +27,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
         MovePlayer(horizontalMovement);
+
+        float characterVelocity = Mathf.Abs(rb.velocity.x);
+
+        animator.SetFloat("Speed", characterVelocity);
     }
 
     void MovePlayer(float _horizontalMovement)
